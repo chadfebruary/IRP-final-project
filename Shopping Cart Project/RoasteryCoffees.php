@@ -16,10 +16,10 @@
 	//require_once("Database.php"); 
 	//$Database = new Database();
 	
-	if (isset($_SESSION['username']) == ""){
+	/*if (isset($_SESSION['username']) == ""){
 		header("Location: login.php");
 		exit;
-	}
+	}*/
 	
 	$PageTitle = "Coffees";
 	$extras = '<link rel= "stylesheet" href = "css/style.css" type="text/css" media="screen" />';
@@ -33,7 +33,6 @@
 	$picture = isset($_GET['picture']) ? $_GET['picture'] : "";
 	$action = isset($_GET['action']) ? $_GET['action'] : "";
 	$quantity = 1;
-	$username = $_SESSION['username'];
 	
 	
 	
@@ -77,8 +76,7 @@
 					echo "<td><div class='price'>R ".$Row["price"]."</div></td>";
 					echo "<td><div class='amountAvailable'>".$Row["amountAvailable"]."</div></td>";
 					echo "<td>";
-						echo "<a href='insertValues.php?username=".$username."&productID=".$Row['productID']."&name=".$Row['name']."&weight=".$Row['weight']."&price=".$Row['price']."&picture=".$Row['picture']."' class='btn btn-primary'>";
-							//echo "<a onclick='insertValues(\"".$Row['productID']."\")'class='btn btn-primary'>";
+						echo "<a onclick='insertValues(\"".$Row['productID']."\")' href='addToCart.php?productID=".$Row['productID']."&name=".$Row['name']."&weight=".$Row['weight']."&price=".$Row['price']."' class='btn btn-primary'>";
 							echo "<span class='glyphicon glyphicon-shopping-cart'></span> Add item to cart";
 						echo "</a>";
 					echo "</td>";
@@ -98,10 +96,10 @@
 			url: "insertValues.php",
 			data: ({productID:prodId, quantity:1}),
 			success: function(data) {
-				alert("Successfully succcuesesdsesesdse ("+prodId+"): " + data);
+				//alert("Successfully succcuesesdsesesdse ("+prodId+"): " + data);
 			},
 			error: function(data){
-				alert("Alert");
+				//alert("Alert");
 			}
 		});
 	};
