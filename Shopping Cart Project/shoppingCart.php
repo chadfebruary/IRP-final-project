@@ -13,7 +13,10 @@ $PageTitle="Cart";
 include 'head.php';
 
 
-
+if (isset($_SESSION['username']) == ""){
+		header("Location: login.php");
+		exit;
+	}
 
 
 $action = isset($_GET['action']) ? $_GET['action'] : "";
@@ -24,12 +27,8 @@ $weight = isset($_GET['weight']) ? $_GET['weight'] : "";
 $price = isset($_GET['price']) ? $_GET['price'] : "";
 $amountAvailable = isset($_GET['amountAvailable']) ? $_GET['amountAvailable'] : "";
 $picture = isset($_GET['picture']) ? $_GET['picture'] : "";
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : "";
 $customerID = '5'; // username
-
-
-
-
-
 
 foreach($_POST AS $key =>$post_var) {
 //echo "Key: $key  Index: $post_var";	
@@ -39,7 +38,7 @@ foreach($_POST AS $key =>$post_var) {
 		echo "$id";		
 		$quantity = $_POST['qnt'];
 		echo $quantity;
-		if ($quantity > 0)
+		if ($quantity > 1)
 		{
 			$Sql = "UPDATE orders SET Quantity = '$quantity' WHERE ProductID = '$id'";
 			$Database->query($Sql);
@@ -57,7 +56,6 @@ else if($action=='quantityUpdated'){
         echo "<strong>".$name."</strong> quantity was updated!";
     echo "</div>";
 }
-
 if(isset($_SESSION["cartItems"]))
 {
 	if(count($_SESSION['cartItems'])>0){
@@ -65,10 +63,13 @@ if(isset($_SESSION["cartItems"]))
 		// get the product ids
 		$productIDs = "";
 		foreach($_SESSION['cartItems'] as $productID=>$value){
-			$productIDs = $productIDs."'". $productID."',";
+			//echo "<p>1".$productID;
+			//echo "<p>".$productID;
+			$productIDs = $productIDs."'".$productID."',";
 		}
+		//unset($_SESSION['cartItems']);
 	//	addToHistory();
-	 //echo $productIDs."\n";
+	 //echo $productIDs;
 		// remove the last comma
 		$productIDs = rtrim($productIDs, ',');
 		//echo $productIDs;
@@ -79,17 +80,18 @@ if(isset($_SESSION["cartItems"]))
 			echo "<tr>";
 				echo "<th class='textAlignLeft'>Picture</th>";
 				echo "<th>Coffee name</th>";
-				echo "<th>Weight</th>";
+				
 				echo "<th>Price</th>";
-				echo "<th>Amount available</th>";
+				//echo "<th>Amount available</th>";
 				echo "<th>Action</th>";
 				echo "<th>Quantity</th>";
+				
 			    
 				
 			echo "</tr>";
 			
-			$Sql = "SELECT productID, name, weight, price, picture, amountAvailable FROM Inventory WHERE productID IN (".$productIDs.") ORDER BY name";
-			
+			//$Sql = "SELECT productID, name, weight, price, picture, amountAvailable FROM Inventory WHERE productID IN (".$productIDs.") ORDER BY name";
+			$Sql = "SELECT * FROM Orders WHERE productID IN (".$productIDs.") AND username = '$username'";
 			$Result = $Database->query($Sql);
 			$Number = $Result->num_rows;
 		
@@ -102,9 +104,10 @@ if(isset($_SESSION["cartItems"]))
 				echo "<tr>";
 					echo "<td><img src='".$Row['picture']."' border = 0></td>";
 					echo "<td>".$Row['name']."</td>";
-					echo "<td>".$Row['weight']."</td>";
+					//echo "<td>".$Row['quantity']."</td>";
+					//echo "<td>".$Row['picture']."</td>";
 					echo "<td>R ".$Row['price']."</td>";
-					echo "<td><div class='amountAvailable'>".$Row["amountAvailable"]."</div></td>";
+					//echo "<td><div class='amountAvailable'>".$Row["amountAvailable"]."</div></td>";
 					echo "<td>";
 						echo "<a href='removeFromCart.php?productID=".$productID."&name=".$name."&weight=".$weight."&price=".$price."&picture=".$picture."' class='btn btn-danger'>";
 						echo "<span class='glyphicon glyphicon-remove'></span> Remove from cart";
@@ -137,9 +140,8 @@ if(isset($_SESSION["cartItems"]))
 					echo "<td><b>Total</b></td>";
 					echo "<td>R ".$TotalPrice."</td>";
 					echo "<td>";
-						echo "<a onclick='buyItem()' href='Success.php' class='btn btn-success'>";
+						echo "<a onclick='buyItem()' href='#' class='btn btn-success'>";
 							echo "<span class='glyphicon glyphicon-shopping-cart'></span> Checkout";
-							
 						echo "</a>";
 					echo "</td>";
 				echo "</tr>";
@@ -152,6 +154,12 @@ if(isset($_SESSION["cartItems"]))
 		echo "</div>";
 	}
  }
+ else 
+ {
+	 echo "<div class='alert alert-danger'>";
+			echo "<strong>No products found</strong> in your cart!";
+		echo "</div>";
+ }
  	?>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript">
@@ -160,16 +168,24 @@ if(isset($_SESSION["cartItems"]))
 			type: "POST",
 			url: "addTransaction.php",
 			success: function(data) {
-			//	alert("Successfully saved" + data);
+				alert("Successfully saved" + data);
 			},
 			error: function(data){
-				//alert("Alert");
+				alert("Alert");
 			}
 		});
 	};
 </script>
 <?php
-  
+ function addToHistory()
+ { 
+	//$customerID = "5";
+	 $Sql = "Insert INTO orders Values('$productID','5','$price')";
+	 $Result = $Database->query($Sql);
+	 $Number = $Result->num_rows;
+	 
+ }
+ 
 include 'foot.php';
 ?>
 </body>
