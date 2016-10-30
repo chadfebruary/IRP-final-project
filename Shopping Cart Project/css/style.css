@@ -1,0 +1,161 @@
+
+
+.header {
+ font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-style: normal;
+    color: #fe504f;
+    letter-spacing: -0.5px;
+    width: 90%;
+
+}
+
+
+h3{
+	color: #424242;
+font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+margin-right:15px;
+letter-spacing:0.1em;
+ text-transform: lowercase;
+ line-height: 145%;
+ font-size: 20pt;
+ font-variant: small-caps;
+ text-align: center;
+
+}
+
+
+header{
+	 font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-style: normal;
+    color: #fe504f;
+    letter-spacing: -0.5px;
+    width: 90%;
+	letter-spacing:0.1em;
+ text-transform: lowercase;
+ line-height: 145%;
+ font-size: 20pt;
+ font-variant: small-caps;
+
+}
+
+p.coffee-text{
+color: #424242;
+font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
+margin-right:15px;
+letter-spacing:0.1em;
+ text-transform: lowercase;
+ line-height: 145%;
+ font-size: 20pt;
+ font-variant: small-caps;
+}
+
+p.coffee{
+letter-spacing:0.1em;
+ text-transform: lowercase;
+ line-height: 145%;
+ font-size: 20pt;
+ font-variant: small-caps;
+	
+}
+
+
+input[type=text]{
+	
+	border:2px solid #456879;
+	border-radius:10px;
+	height: 22px;
+	width: 230px;
+}
+
+input[type=password]{
+	
+	border:2px solid #456879;
+	border-radius:10px;
+	height: 22px;
+	width: 230px;
+}
+
+input[type=submit]
+{
+	 font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
+	border-radius:10px;
+	height: 22px;
+	width: 230px;
+	margin-top:22px;	
+	
+}
+
+
+a:link {
+    color: #424242;
+}
+
+/* visited link */
+a:visited {
+    color:  #456879;
+}
+
+/* mouse over link */
+a:hover {
+    color: green;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
+a:font{
+	
+	font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
+}
+
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+
+th , td{
+	  padding: 15px;
+	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+
+}
+
+hover {
+   background-color: #464A52;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+	        box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+td:hover {
+  background-color: #ef5b5b;
+  color: #ef5b5b;
+  font-weight: bold;
+  box-shadow: #ef5b5b -1px 1px, #ef5b5b -2px 2px, #ef5b5b -3px 3px, #ef5b5b -4px 4px, #ef5b5b -5px 5px, #ef5b5b -6px 6px;
+ 
+  
+  transition-delay: 0s;
+	  transition-duration: 0.1s;
+	  transition-property: all;
+  transition-timing-function: line;
+
+}
+
+tr:hover {
+   background-color: #464A52;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+	        box-shadow: 0 6px 6px -6px #0E1119;
+}
+	
+
+	
+
